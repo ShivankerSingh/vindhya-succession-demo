@@ -292,12 +292,6 @@ main{padding:24px 32px 60px;max-width:1600px;margin:0 auto}
 
 /* Mini-matrix on successor cards — label-free, sized for at-a-glance reading */
 .succ-minigrid{display:flex;align-items:center;justify-content:flex-start;margin-top:8px;cursor:help}
-.succ-dualgrid{display:flex;gap:10px;margin-top:8px;align-items:flex-end}
-.succ-dualgrid .mg-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:help}
-.succ-dualgrid .mg-lbl{font-size:8px;font-weight:700;letter-spacing:.06em;opacity:.75;text-transform:uppercase}
-.succ-dualgrid .mg-block{display:flex}
-.succ-dualgrid .mg-svg{width:44px;height:44px;flex-shrink:0}
-.succ-card.r1 .succ-dualgrid .mg-lbl{opacity:.85}
 .succ-minigrid .mg-svg{width:52px;height:52px;flex-shrink:0;
   filter:drop-shadow(0 1px 2px rgba(0,0,0,.08))}
 .succ-minigrid .mg-cell{stroke:#fff;stroke-width:1.2}
@@ -1498,8 +1492,8 @@ body.story-mode main{padding-bottom:110px}
         </div>
         <div class="pv-sticky" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
           <div class="pv-toggle" role="tablist" aria-label="Successor card view mode">
-            <button class="active" data-pvm="ninebox" onclick="setPipelineViewMode('ninebox')">Fit × Potential</button>
-            <button data-pvm="ai" onclick="setPipelineViewMode('ai')">AI Readiness</button>
+            <button class="active" data-pvm="ninebox" onclick="setPipelineViewMode('ninebox')">9-box view</button>
+            <button data-pvm="ai" onclick="setPipelineViewMode('ai')">AI Readiness view</button>
           </div>
           <div class="pv-legend" id="pv-legend"></div>
           <div class="pipeline-sort" style="margin-left:auto">
@@ -2136,31 +2130,6 @@ const READINESS_MATRIX_ZONES = [
   ["Ready in 2–3 years","Ready in 2–3 years","Ready in 1 year"],
   ["Ready in 4+ years","Ready in 4+ years","Ready in 2–3 years"]
 ];
-// Rows of the readiness matrix = Fit level (row 0 = High Fit, row 2 = Low Fit).
-// Cols = Potential level (col 0 = Low Pot, col 2 = High Pot).
-// Reverse lookup: for a given readiness label, which (fitLevel, potLevel) combinations produce it?
-// Built once at load — used by buildDemo to derive consistent slot data.
-const READINESS_TO_COMBOS = (function(){
-  const map = {};
-  for(let r=0;r<3;r++){
-    for(let c=0;c<3;c++){
-      const readiness = READINESS_MATRIX_ZONES[r][c];
-      const fitLevel = 2 - r; // row 0 (top) = High Fit = level 2
-      const potLevel = c;     // col 0 = Low Pot = level 0
-      if(!map[readiness]) map[readiness] = [];
-      map[readiness].push({fitLevel, potLevel});
-    }
-  }
-  return map;
-})();
-// Valid potential levels for each readiness horizon (used to constrain leader picks)
-const POT_LEVELS_FOR_READINESS = (function(){
-  const map = {};
-  Object.keys(READINESS_TO_COMBOS).forEach(r=>{
-    map[r] = new Set(READINESS_TO_COMBOS[r].map(c=>c.potLevel));
-  });
-  return map;
-})();
 
 const NAMES = ["Anand Sharma","Priya Menon","Ravi Iyer","Meera Kapoor","Vikram Tandon","Shruti Rao",
 "Arjun Malhotra","Kavya Nair","Rohit Bansal","Nisha Reddy","Karthik Subramanian","Anjali Bhatt","Sameer Joshi",
@@ -2419,37 +2388,23 @@ function generateDemo(){
     else if(pos<90) healthTargets[idx] = "atrisk";
     else healthTargets[idx] = "exposed";
   });
-  // Round-robin allocation per pool — CONSTRAINED by potential level required by the target readiness.
-  // Ready Now MUST come from a High-Potential leader (nineBoxRow 0); Ready-in-1yr from row 0 or 1; etc.
-  // This is what keeps the 9-box placement and the Succession Readiness consistent — both derive from
-  // the same underlying potential score, so they cannot contradict each other.
+  // Round-robin allocation per pool to spread names across roles
   const cursor = {LA:0, LB:0, LC:0};
   const usedCount = {}; leaders.forEach(l=>usedCount[l.id]=0);
-  const potLevelOf = l => 2 - l.nineBoxRow; // row 0 → 2 (High), row 2 → 0 (Low)
-  const pickFromPool = (poolKey, avoid, validPotLevels) => {
+  const pickFromPool = (poolKey, avoid) => {
     const p = pools[poolKey]; if(!p.length) return null;
-    // Filter by valid potential levels for the target readiness
-    const eligible = p.filter(l => validPotLevels.has(potLevelOf(l)) && !avoid.has(l.id));
-    if(!eligible.length) return null;
-    // Prefer least-used within eligible; cursor-based round-robin
-    let start = cursor[poolKey] % eligible.length;
+    let start = cursor[poolKey];
     let best = null; let bestCount = 99;
-    for(let i=0;i<eligible.length;i++){
-      const cand = eligible[(start+i)%eligible.length];
+    for(let i=0;i<p.length;i++){
+      const cand = p[(start+i)%p.length];
+      if(avoid.has(cand.id)) continue;
       if(usedCount[cand.id] < bestCount){ best = cand; bestCount = usedCount[cand.id]; }
       if(bestCount===0) break;
     }
-    if(!best) best = eligible[start];
-    cursor[poolKey] = (cursor[poolKey] + 1) % Math.max(p.length,1);
+    if(!best){ best = p[start%p.length]; }
+    cursor[poolKey] = (start + 1) % p.length;
     usedCount[best.id]++;
     return best;
-  };
-  // Given a picked leader's potLevel + target readiness, derive the fitLevel deterministically.
-  // This ensures the (fit, pot) coordinates on the Fit×Pot matrix produce exactly the target readiness.
-  const deriveFitLevel = (readiness, potLevel, rand) => {
-    const opts = (READINESS_TO_COMBOS[readiness] || []).filter(c => c.potLevel === potLevel);
-    if(!opts.length) return 1;
-    return opts[Math.floor(rand * opts.length)].fitLevel;
   };
   roles.forEach((r,ri)=>{
     const bucket = healthTargets[ri];
@@ -2458,22 +2413,13 @@ function generateDemo(){
     r.slots = [];
     r.successors = [];
     const already = new Set();
-    slotPlan.forEach((readiness, slotIdx)=>{
-      const validPot = POT_LEVELS_FOR_READINESS[readiness] || new Set([0,1,2]);
+    slotPlan.forEach(readiness=>{
       const poolKeys = r.tier===1 ? ["LA","LB"] : r.tier===2 ? ["LA","LB","LC"] : ["LB","LC"];
       let picked = null;
-      for(const pk of poolKeys){ picked = pickFromPool(pk, already, validPot); if(picked) break; }
-      // Fallback: relax pot constraint if no eligible candidate exists (rare — happens for exposed roles)
-      if(!picked){
-        for(const pk of poolKeys){ picked = pickFromPool(pk, already, new Set([0,1,2])); if(picked) break; }
-      }
+      for(const pk of poolKeys){ picked = pickFromPool(pk, already); if(picked) break; }
       if(!picked) return;
       already.add(picked.id);
-      const potLevel = potLevelOf(picked);
-      const fitLevel = deriveFitLevel(readiness, potLevel, seeded(ri*17 + slotIdx*23 + 5));
-      // Actual readiness derived from (fit, pot) — will match target for constrained picks
-      const actualReadiness = READINESS_MATRIX_ZONES[2-fitLevel][potLevel];
-      r.slots.push({leaderId: picked.id, readiness: actualReadiness, fitLevel, potLevel});
+      r.slots.push({leaderId: picked.id, readiness});
       r.successors.push(picked.id);
     });
   });
@@ -4112,13 +4058,6 @@ const _PALETTE_AI = [
   ["#F5A45A","#8AB4EE","#6BC9A6"],   // row 1: med change   (Willing follower, Steady adopter, Confident user)
   ["#EF4B4E","#EF4B4E","#F5A45A"],   // row 2: low change   (At risk, Reluctant, Skilled sceptic)
 ];
-// Fit × Potential palette — cell colour = readiness horizon at that (Fit, Pot) cell.
-// Row 0 = High Fit; Col 2 = High Potential. Ready-Now sits top-right.
-const _PALETTE_FP = [
-  ["#F5A45A","#F5CE3E","#6BC9A6"],   // row 0: high fit → Ready 2-3yr, Ready 1yr, Ready Now
-  ["#F5A45A","#F5A45A","#F5CE3E"],   // row 1: med fit  → Ready 2-3yr, Ready 2-3yr, Ready 1yr
-  ["#EF4B4E","#EF4B4E","#F5A45A"],   // row 2: low fit  → Ready 4+yr, Ready 4+yr, Ready 2-3yr
-];
 // Cell name matrix — used for hover tooltips
 const _NAMES_NB = [
   ["Enigma","Growth Employee","Future Leader"],
@@ -4130,7 +4069,6 @@ const _NAMES_AI = [
   ["Willing Follower","Steady Adopter","Confident User"],
   ["At Risk","Reluctant User","Skilled Sceptic"],
 ];
-const _NAMES_FP = READINESS_MATRIX_ZONES; // same 3x3 mapping — cell label is the readiness horizon
 
 function _leaderMatrixPos(l, mode){
   if(mode === "ai"){
@@ -4139,13 +4077,14 @@ function _leaderMatrixPos(l, mode){
   return { row: l.nineBoxRow != null ? l.nineBoxRow : 1, col: l.nineBoxCol != null ? l.nineBoxCol : 1 };
 }
 
-// Generic 3x3 mini-grid renderer — draws the palette + highlights (row, col).
-// mode: "ninebox" | "ai" | "fitpot" — governs palette + tooltip framework label.
-function _renderMiniGrid(row, col, mode){
-  const palette = mode === "ai" ? _PALETTE_AI : mode === "fitpot" ? _PALETTE_FP : _PALETTE_NB;
-  const names   = mode === "ai" ? _NAMES_AI   : mode === "fitpot" ? _NAMES_FP   : _NAMES_NB;
-  const frameLbl= mode === "ai" ? "AI Readiness" : mode === "fitpot" ? "Fit × Potential" : "9-box";
-  const size = 12, gap = 1.4, pad = 1;
+// Mini 3x3 matrix — label-free, SVG, highlights the leader's cell.
+// Hover tooltip carries the framework + zone name.
+function renderMiniMatrix(l){
+  const mode = STATE.pipelineViewMode || "ninebox";
+  const palette = mode === "ai" ? _PALETTE_AI : _PALETTE_NB;
+  const names = mode === "ai" ? _NAMES_AI : _NAMES_NB;
+  const {row, col} = _leaderMatrixPos(l, mode);
+  const size = 14, gap = 1.4, pad = 1;
   const total = pad*2 + size*3 + gap*2;
   let cells = "";
   for(let r=0;r<3;r++){
@@ -4156,37 +4095,10 @@ function _renderMiniGrid(row, col, mode){
         width="${size}" height="${size}" rx="1.6" fill="${palette[r][c]}"/>`;
     }
   }
-  const zoneLbl = names[row] && names[row][col] ? names[row][col] : "";
-  return `<div class="mg-block" title="${frameLbl}: ${zoneLbl}">
+  const frameLbl = mode === "ai" ? "AI Readiness" : "9-box";
+  const zoneLbl = names[row][col];
+  return `<div class="succ-minigrid" title="${frameLbl}: ${zoneLbl}">
     <svg class="mg-svg" viewBox="0 0 ${total} ${total}">${cells}</svg>
-  </div>`;
-}
-
-// Legacy alias — still used by role-level 9-box + a couple of other spots.
-// Returns just the 9-box mini for a leader (label-free wrapper for backwards compat).
-function renderMiniMatrix(l){
-  const {row, col} = _leaderMatrixPos(l, "ninebox");
-  return `<div class="succ-minigrid">${_renderMiniGrid(row, col, "ninebox")}</div>`;
-}
-
-// New: two-grid mini for a successor card — 9-box (left) + Fit×Pot or AI (right).
-// Takes the leader plus their slot (which carries fitLevel + potLevel for this specific role).
-function renderSuccessorMinis(l, slot){
-  const nb = _leaderMatrixPos(l, "ninebox");
-  const rightMode = STATE.pipelineViewMode === "ai" ? "ai" : "fitpot";
-  let rightRow, rightCol;
-  if(rightMode === "ai"){
-    const ai = _leaderMatrixPos(l, "ai");
-    rightRow = ai.row; rightCol = ai.col;
-  } else {
-    // Fit×Pot uses SLOT data (role-specific fit) — row 0 = High Fit, col 0 = Low Pot
-    rightCol = slot.potLevel != null ? slot.potLevel : (2 - l.nineBoxRow);
-    rightRow = slot.fitLevel != null ? (2 - slot.fitLevel) : 1;
-  }
-  const rightLbl = rightMode === "ai" ? "AI" : "FIT×POT";
-  return `<div class="succ-dualgrid">
-    <div class="mg-wrap"><div class="mg-lbl">9-BOX</div>${_renderMiniGrid(nb.row, nb.col, "ninebox")}</div>
-    <div class="mg-wrap"><div class="mg-lbl">${rightLbl}</div>${_renderMiniGrid(rightRow, rightCol, rightMode)}</div>
   </div>`;
 }
 
@@ -4251,19 +4163,12 @@ function setPipelineViewMode(mode){
   renderSuccRoleTable();
 }
 
-// Colour-key legend for the two-grid card view.
-// Card background = readiness. Left grid = 9-box. Right grid = Fit×Pot (default) or AI Readiness.
+// Colour-key legend for the current view (shows the four palette buckets, not all 9 zones)
 function renderPipelineLegend(){
   const el = document.getElementById("pv-legend");
   if(!el) return;
   const mode = STATE.pipelineViewMode || "ninebox";
-  const nbItems = [
-    {color:"#6BC9A6", label:"Future Leader / High Impact"},
-    {color:"#F5CE3E", label:"Growth / Core / Trusted"},
-    {color:"#F5A45A", label:"Enigma"},
-    {color:"#EF4B4E", label:"Under-performer / Dilemma"},
-  ];
-  const rightItems = mode === "ai"
+  const items = mode === "ai"
     ? [
         {color:"#6BC9A6", label:"AI Ready"},
         {color:"#F5CE3E", label:"Emerging"},
@@ -4271,21 +4176,27 @@ function renderPipelineLegend(){
         {color:"#EF4B4E", label:"At risk"},
       ]
     : [
-        {color:"#6BC9A6", label:"Ready Now"},
-        {color:"#F5CE3E", label:"Ready 1yr"},
-        {color:"#F5A45A", label:"Ready 2-3yr"},
-        {color:"#EF4B4E", label:"Ready 4+yr"},
+        {color:"#6BC9A6", label:"Future Leader / High Impact"},
+        {color:"#F5CE3E", label:"Growth / Core / Trusted"},
+        {color:"#F5A45A", label:"Enigma"},
+        {color:"#EF4B4E", label:"Under-performer / Dilemma"},
       ];
-  const rightLbl = mode === "ai" ? "AI grid" : "Fit×Pot grid";
-  const legendGroup = (title, items) =>
-    `<span style="color:var(--ink-3);font-weight:500">${title}</span>`
+  const readinessItems = [
+    {color:"var(--rn-g)", label:"Ready Now"},
+    {color:"var(--rn-y)", label:"Ready 1yr"},
+    {color:"var(--rn-o)", label:"Ready 2-3yr"},
+    {color:"var(--rn-r)", label:"Ready 4+yr"},
+  ];
+  el.innerHTML =
+    `<span style="color:var(--ink-3);font-weight:500">Card colour</span>`
+    + readinessItems.map(it =>
+        `<span class="lg-item"><span class="lg-swatch" style="background:${it.color}"></span>${it.label}</span>`
+      ).join("")
+    + `<span style="color:var(--line);margin:0 4px">|</span>`
+    + `<span style="color:var(--ink-3);font-weight:500">Mini-grid</span>`
     + items.map(it =>
         `<span class="lg-item"><span class="lg-swatch" style="background:${it.color}"></span>${it.label}</span>`
       ).join("");
-  el.innerHTML =
-    legendGroup("9-box grid", nbItems)
-    + `<span style="color:var(--line);margin:0 4px">|</span>`
-    + legendGroup(rightLbl, rightItems);
 }
 
 // ---------- Succession Health ----------
@@ -4672,13 +4583,13 @@ function renderSuccRoleTable(){
       }
       const readiness = sl.readiness;
       const frClass = readiness===READINESS[1]?"dark":"";
-      const minis = renderSuccessorMinis(s, sl);
+      const miniMatrix = renderMiniMatrix(s);
       html += `<td><div class="succ-card ${rClass(readiness)}" title="Readiness: ${readiness}">
         <div class="succ-top">
           <div class="succ-name" title="${s.name}">${s.name}</div>
           <div class="succ-lvl">${s.level}</div>
         </div>
-        ${minis}
+        ${miniMatrix}
         <div class="succ-meta">
           <span class="fr ${frClass}">Flight: ${s.flightRisk}</span>
           <span class="mob">${s.openRelocate?'✓ Mobile':'— Fixed'}</span>
@@ -5966,4 +5877,124 @@ function handleFile(file){
         const totalLenses = TRAITS.length*3 - BUSINESS_LEVERS.length; // 27
         const completedLenses = TRAITS.reduce((acc,t)=>{
           let c = 0;
-       
+          if(traits[t].PN!=null) c++;
+          if(traits[t].PC!=null) c++;
+          if(!BUSINESS_LEVERS.includes(t) && traits[t].PT!=null) c++;
+          return acc + c;
+        }, 0);
+        const dqPct = completedLenses/totalLenses;
+        const dqStatus = dqPct>=0.9 ? "complete" : dqPct>=0.6 ? "partial" : "thin";
+        const dqNote = dqStatus==="complete" ? "Full GLIDE assessment"
+                       : dqStatus==="partial" ? `${completedLenses}/${totalLenses} trait scores present`
+                       : `${completedLenses}/${totalLenses} — assessment incomplete`;
+        return {
+          id: String(row.LeaderID||""), name: row.Name||"",
+          role: row.CurrentRole||"", bu: row.BU||"", function: row.Function||"",
+          level: row.Level||"LC", country: row.Country||"India", gender: row.Gender||"M",
+          tenure, manager: row.Manager||"",
+          performance: row.Performance||"", nineBox: row.NineBox||"Core employee",
+          nineBoxRow, nineBoxCol, readiness: row.Readiness||READINESS[2],
+          aspiration: row.Aspiration||"", mobility: row.Mobility||"",
+          openRelocate: (String(row.OpenToRelocate||"")).toLowerCase().startsWith("y"),
+          flightRisk: row.FlightRisk||"Low",
+          changeReadiness: parseInt(row.ChangeReadiness_1to3)||2,
+          aiUse: parseInt(row.AIUse_1to3)||2,
+          traits, personality,
+          potentialScore: nPT?sumPT/nPT:0, fitToRole: n?sumPC/n:0, personalityScore: nPN?sumPN/nPN:0,
+          // Diversity fields
+          age,
+          generation: age ? (age>=60?"Boomer":age>=45?"Gen X":age>=29?"Millennial":"Gen Z") : "Unknown",
+          originBU: row.OriginBU || row.BU || "",
+          education: row.Education || "Other",
+          tenureBand: tenure<3?"<3 yrs":tenure<7?"3–7 yrs":tenure<12?"7–12 yrs":"12+ yrs",
+          dataQuality: {status: dqStatus, note: dqNote}
+        };
+      });
+
+      // Parse roles
+      let roles;
+      if(rolesSheet){
+        const rr = XLSX.utils.sheet_to_json(rolesSheet);
+        roles = rr.map(r=>({
+          id: String(r.RoleID||""), title: r.Title||"",
+          family: r.Family||"Enterprise Executive",
+          tier: parseInt(r.Tier)||1,
+          cl: String(r.CL||"LB"), bu: r.BU||"", incumbent: r.Incumbent||"—",
+          lastReviewed: r.LastReviewed||"",
+          businessContext: r.BusinessContext||"",
+          successors: [],
+          slots: []
+        }));
+      } else { roles = STATE.roles; }
+
+      // Parse Successors sheet — the many-to-many mapping
+      if(successorsSheet){
+        const srows = XLSX.utils.sheet_to_json(successorsSheet);
+        srows.forEach(sr=>{
+          const rid = String(sr.RoleID||"");
+          const lid = String(sr.LeaderID||"");
+          const readiness = sr.ReadinessForThisRole || READINESS[2];
+          const slotOrder = parseInt(sr.SlotOrder)||1;
+          const role = roles.find(r=>r.id===rid);
+          if(!role) return;
+          role.slots[slotOrder-1] = {leaderId: lid, readiness};
+        });
+        // Compact and rebuild successors list
+        roles.forEach(r=>{
+          r.slots = (r.slots||[]).filter(Boolean);
+          r.successors = r.slots.map(s=>s.leaderId);
+        });
+      } else if(rolesSheet){
+        // Backward compat: old templates had Successor1/2/3 columns on Roles
+        const rr = XLSX.utils.sheet_to_json(rolesSheet);
+        rr.forEach(r=>{
+          const role = roles.find(x=>x.id===String(r.RoleID||""));
+          if(!role) return;
+          const succs = [r.Successor1, r.Successor2, r.Successor3].filter(Boolean).map(String);
+          role.slots = succs.map(sid=>{
+            const l = leaders.find(x=>x.id===sid);
+            return {leaderId: sid, readiness: l?l.readiness:READINESS[2]};
+          });
+          role.successors = succs;
+        });
+      }
+
+      STATE.leaders = leaders; STATE.roles = roles;
+      STATE.demo = false;
+      STATE.currentRole = null; STATE.currentLeader = null;
+      closeUpload();
+      renderAll(); renderExecutive();
+      switchView("executive");
+      toast(`Loaded ${leaders.length} leaders and ${roles.length} roles`);
+    } catch(err){
+      toast("Could not read the file: "+err.message, "error");
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+document.addEventListener("DOMContentLoaded", ()=>{
+  const dz = document.getElementById("drop-zone");
+  if(dz){
+    ["dragover","dragenter"].forEach(evt=>dz.addEventListener(evt, e=>{e.preventDefault(); dz.classList.add("drag-over");}));
+    ["dragleave","drop"].forEach(evt=>dz.addEventListener(evt, e=>{e.preventDefault(); dz.classList.remove("drag-over");}));
+    dz.addEventListener("drop", e=>{ const f = e.dataTransfer.files[0]; if(f) handleFile(f); });
+  }
+});
+function exportAll(){
+  const payload = {
+    exportedAt: nowFmt(), filters: STATE.filters,
+    leaders: STATE.leaders, roles: STATE.roles,
+    notes: STATE.notes, actions: STATE.actions, roleNotes: STATE.roleNotes
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "Vindhya_TalentReview_Session_"+nowFmt().replace(/[: ]/g,"-")+".json";
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+init();
+</script>
+</body>
+</html>
