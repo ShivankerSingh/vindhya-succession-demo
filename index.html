@@ -5482,8 +5482,8 @@ function computeImpact(scenario){
       affected.push({role:br, from:"", to:"", note:"Filled by promotion", tone:"up"});
       return;
     }
-    const baseClass = pipeClassFor(br.slots||[]);
-    const scenClass = pipeClassFor(sr.slots||[]);
+    const baseClass = _pipeClassSimple(br.slots||[]);
+    const scenClass = _pipeClassSimple(sr.slots||[]);
     const baseBench = (br.slots||[]).length;
     const scenBench = (sr.slots||[]).length;
     if(baseClass !== scenClass){
@@ -5510,6 +5510,14 @@ function computeImpact(scenario){
 }
 function _labelPipeClass(cls){
   return {g:"Healthy",a:"Watch",o:"At-risk",r:"Exposed"}[cls] || cls;
+}
+// Global pipe-class helper — mirrors the one nested inside renderSuccRoleTable
+// but exposed to the scenario engine. Returns g/a/o/r (matching _labelPipeClass keys).
+function _pipeClassSimple(slots){
+  const hasRN = slots.some(sl=>sl.readiness===READINESS[0]);
+  const has1 = slots.some(sl=>sl.readiness===READINESS[1]);
+  const has2 = slots.some(sl=>sl.readiness===READINESS[2]);
+  return hasRN ? "g" : has1 ? "a" : has2 ? "o" : "r";
 }
 
 // ---------- Scenario tab renderer ----------
