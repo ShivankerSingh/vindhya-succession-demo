@@ -1536,7 +1536,11 @@ body.story-mode main{padding-bottom:110px}
     <div class="section-hd">
       <h2>Successor Readiness Matrix</h2>
       <span class="info-i">i<span class="tip"><b>How to read this matrix</b>Each cell shows successors placed by their <b>Functional Readiness / Fit</b> for the target role and their <b>Leadership Potential</b>. The cell colour then implies their readiness horizon.<br><br><b>Axes</b><br>· X — Leadership Potential: from Aon's GLIDE assessment (PT lens + ADEPT-15)<br>· Y — Functional Readiness / Fit: from a company line-leader survey for each target role<br><br>Click a cell to open the leaders in it.</span></span>
-      <div class="mini-filter" style="margin-left:auto">
+      <div class="mini-filter" style="margin-left:auto;gap:8px">
+        <span class="lbl">BU</span>
+        <div id="rd-bu-filter"></div>
+        <span class="lbl">Family</span>
+        <div id="rd-family-filter"></div>
         <span class="lbl">Level</span>
         <div id="rd-level-filter"></div>
       </div>
@@ -2452,7 +2456,7 @@ let STATE = {
   leaders: [], roles: [],
   filters: {bu:[], level:[], country:[], function:[]},
   lfilters: {bu:[], level:[]},
-  nbLevel: [], aiLevel: [], rdLevel: [],
+  nbLevel: [], aiLevel: [], rdLevel: [], rdBU: [], rdFamily: [],
   piLevel: [], piBU: [],
   piOverlays: {gmrBench:true, indiaBench:false, LA:false, LB:false, LC:false, LD:false},
   pipelineSort: "default",
@@ -2689,7 +2693,33 @@ function buildFilters(){
   document.getElementById("nb-level-filter").innerHTML = `<button class="mini-chip" onclick="clearMini('nbLevel')" data-mid="nbLevel-all">All</button>` + mkMini("nbLevel", LEVELS);
   document.getElementById("ai-level-filter").innerHTML = `<button class="mini-chip" onclick="clearMini('aiLevel')" data-mid="aiLevel-all">All</button>` + mkMini("aiLevel", LEVELS);
   document.getElementById("rd-level-filter").innerHTML = `<button class="mini-chip" onclick="clearMini('rdLevel')" data-mid="rdLevel-all">All</button>` + mkMini("rdLevel", LEVELS);
+  const buEl = document.getElementById("rd-bu-filter");
+  if(buEl) buEl.innerHTML = filterDropdownRD("rdBU","Business unit",BUs);
+  const famEl = document.getElementById("rd-family-filter");
+  if(famEl) famEl.innerHTML = filterDropdownRD("rdFamily","Job family",FAMILIES);
   updateMiniChips();
+}
+function filterDropdownRD(key, label, options){
+  const arr = STATE[key] || [];
+  const has = arr.length>0;
+  return `<div class="f-drop">
+    <button class="f-btn ${has?'has':''}" onclick="toggleMenu(event,this)">
+      ${label}${has?`<span class="badge">${arr.length}</span>`:''}<span class="caret">▾</span>
+    </button>
+    <div class="f-menu">
+      ${options.map(o=>`<label class="f-opt">
+        <input type="checkbox" ${arr.includes(o)?'checked':''} onchange="onRDFilter('${key}','${o.replace(/'/g,"\\'")}',this.checked)">${o}
+      </label>`).join("")}
+    </div>
+  </div>`;
+}
+function onRDFilter(key, value, checked){
+  const arr = STATE[key];
+  const i = arr.indexOf(value);
+  if(checked && i<0) arr.push(value);
+  if(!checked && i>=0) arr.splice(i,1);
+  buildFilters();
+  renderReadinessMatrix();
 }
 function filterDropdownPI(key, label, options){
   const arr = STATE[key] || [];
@@ -3727,8 +3757,13 @@ function renderAi33(){
 function renderReadinessMatrix(){
   const c = document.getElementById("readiness-grid");
   if(!c) return;
+  // BU + Family filters operate on TARGET roles: include successors for roles matching the filter.
+  // Level filter operates on the successor's own level.
+  let roleSet = STATE.roles;
+  if(STATE.rdBU.length) roleSet = roleSet.filter(r=>STATE.rdBU.includes(r.bu));
+  if(STATE.rdFamily.length) roleSet = roleSet.filter(r=>STATE.rdFamily.includes(r.family));
   const succSet = new Set();
-  STATE.roles.forEach(r=>r.successors.forEach(s=>succSet.add(s)));
+  roleSet.forEach(r=>r.successors.forEach(s=>succSet.add(s)));
   let pool = STATE.leaders.filter(l=>succSet.has(l.id));
   if(STATE.rdLevel.length) pool = pool.filter(l=>STATE.rdLevel.includes(l.level));
   const total = pool.length;
@@ -5953,48 +5988,4 @@ function handleFile(file){
           const succs = [r.Successor1, r.Successor2, r.Successor3].filter(Boolean).map(String);
           role.slots = succs.map(sid=>{
             const l = leaders.find(x=>x.id===sid);
-            return {leaderId: sid, readiness: l?l.readiness:READINESS[2]};
-          });
-          role.successors = succs;
-        });
-      }
-
-      STATE.leaders = leaders; STATE.roles = roles;
-      STATE.demo = false;
-      STATE.currentRole = null; STATE.currentLeader = null;
-      closeUpload();
-      renderAll(); renderExecutive();
-      switchView("executive");
-      toast(`Loaded ${leaders.length} leaders and ${roles.length} roles`);
-    } catch(err){
-      toast("Could not read the file: "+err.message, "error");
-      console.error(err);
-    }
-  };
-  reader.readAsArrayBuffer(file);
-}
-document.addEventListener("DOMContentLoaded", ()=>{
-  const dz = document.getElementById("drop-zone");
-  if(dz){
-    ["dragover","dragenter"].forEach(evt=>dz.addEventListener(evt, e=>{e.preventDefault(); dz.classList.add("drag-over");}));
-    ["dragleave","drop"].forEach(evt=>dz.addEventListener(evt, e=>{e.preventDefault(); dz.classList.remove("drag-over");}));
-    dz.addEventListener("drop", e=>{ const f = e.dataTransfer.files[0]; if(f) handleFile(f); });
-  }
-});
-function exportAll(){
-  const payload = {
-    exportedAt: nowFmt(), filters: STATE.filters,
-    leaders: STATE.leaders, roles: STATE.roles,
-    notes: STATE.notes, actions: STATE.actions, roleNotes: STATE.roleNotes
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "Vindhya_TalentReview_Session_"+nowFmt().replace(/[: ]/g,"-")+".json";
-  document.body.appendChild(a); a.click(); a.remove();
-}
-
-init();
-</script>
-</body>
-</html>
+            return {leaderId: s
