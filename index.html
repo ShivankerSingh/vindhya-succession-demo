@@ -416,6 +416,94 @@ main{padding:24px 32px 60px;max-width:1600px;margin:0 auto}
 
 .rv-layout{display:grid;grid-template-columns:340px 1fr;gap:16px}
 
+/* ===================== SCENARIOS ===================== */
+.scen-header{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.scen-current{display:flex;align-items:center;gap:10px;flex:1;min-width:280px}
+.scen-lbl{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.scen-name-input{border:none;background:#F7F8F9;border-radius:4px;padding:8px 12px;font-size:14px;
+  font-family:inherit;min-width:280px;flex:1;color:var(--ink)}
+.scen-name-input:focus{outline:2px solid var(--aon-red);background:#fff}
+.scen-count{font-size:11px;color:var(--ink-3);padding:4px 10px;background:#F1F2F3;border-radius:99px;font-weight:600}
+.scen-actions{display:flex;gap:8px}
+.scen-btn{background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:4px;
+  font-size:12px;font-weight:600;cursor:pointer;color:var(--ink);font-family:inherit}
+.scen-btn:hover{background:#F7F8F9}
+.scen-btn.primary{background:var(--aon-red);color:#fff;border-color:var(--aon-red)}
+.scen-btn.primary:hover{background:#C60014}
+.scen-btn.primary:disabled{background:#E8E9EA;color:#A0A0A0;border-color:#E8E9EA;cursor:not-allowed}
+.scen-workarea{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.scen-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.scen-panel-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px}
+.scen-panel-hd h2{font-size:14px;margin:0;color:var(--ink);letter-spacing:.02em}
+.scen-type-tabs{display:flex;gap:4px;background:#F1F2F3;padding:3px;border-radius:6px}
+.scen-type-tabs button{background:transparent;border:none;padding:6px 12px;font-size:12px;
+  font-weight:600;color:var(--ink-3);cursor:pointer;border-radius:4px;font-family:inherit}
+.scen-type-tabs button.active{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.scen-config{background:#F7F8F9;border-radius:6px;padding:14px 16px;margin-bottom:10px}
+.scen-config .cfg-row{margin-bottom:12px}
+.scen-config .cfg-row:last-child{margin-bottom:0}
+.scen-config label{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;
+  font-weight:600;display:block;margin-bottom:5px}
+.scen-config select,.scen-config input[type="text"]{width:100%;padding:8px 10px;border:1px solid var(--line);
+  border-radius:4px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink)}
+.scen-config select:focus,.scen-config input:focus{outline:1px solid var(--aon-red);border-color:var(--aon-red)}
+.scen-config .helper{font-size:11px;color:var(--ink-3);margin-top:4px;font-style:italic}
+.scen-add-btn{background:var(--aon-red);color:#fff;border:none;padding:8px 18px;border-radius:4px;
+  font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:10px}
+.scen-add-btn:hover{background:#C60014}
+.scen-add-btn:disabled{background:#E8E9EA;color:#A0A0A0;cursor:not-allowed}
+.scen-devbet-picker{display:flex;flex-wrap:wrap;gap:5px;max-height:150px;overflow-y:auto;
+  padding:8px;background:#fff;border:1px solid var(--line);border-radius:4px}
+.scen-devbet-chip{padding:4px 10px;background:#F1F2F3;border:1px solid transparent;border-radius:99px;
+  font-size:11px;cursor:pointer;user-select:none}
+.scen-devbet-chip.selected{background:#0A3661;color:#fff;border-color:#0A3661}
+.scen-slider{width:100%;margin:6px 0}
+.scen-slider-val{font-size:16px;font-weight:600;color:var(--aon-red)}
+.scen-changes-list{min-height:60px}
+.scen-change-row{background:#F7F8F9;border-left:3px solid var(--aon-red);padding:10px 14px;
+  border-radius:4px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.scen-change-row .ch-type{font-size:9px;font-weight:700;color:var(--aon-red);letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 8px;background:#fff;border-radius:99px}
+.scen-change-row .ch-body{flex:1;font-size:12px;color:var(--ink)}
+.scen-change-row .ch-body b{color:var(--ink)}
+.scen-change-row .ch-remove{background:transparent;border:none;color:var(--ink-3);cursor:pointer;
+  font-size:16px;padding:2px 6px;line-height:1}
+.scen-change-row .ch-remove:hover{color:var(--aon-red)}
+.scen-empty-state{padding:20px;text-align:center;color:var(--ink-4);font-size:12px;font-style:italic;
+  background:#F7F8F9;border-radius:4px}
+.scen-impact-tiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.scen-impact-tile{background:#F7F8F9;border-radius:6px;padding:12px 14px}
+.scen-impact-tile .lbl{font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;
+  font-weight:600;margin-bottom:6px}
+.scen-impact-tile .val{font-size:20px;font-weight:600;color:var(--ink);line-height:1.1}
+.scen-impact-tile .val .arrow{color:var(--ink-3);font-size:14px;margin:0 6px}
+.scen-impact-tile .delta{font-size:11px;font-weight:600;margin-top:4px}
+.scen-impact-tile .delta.up{color:#0F8759}
+.scen-impact-tile .delta.dn{color:#EB0017}
+.scen-impact-tile .delta.flat{color:var(--ink-3)}
+.scen-affected-hd{font-size:12px;font-weight:600;color:var(--ink);margin:10px 0 8px 0}
+.scen-affected-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#F7F8F9;
+  border-radius:4px;margin-bottom:5px;font-size:12px}
+.scen-affected-row .r-name{flex:1;color:var(--ink);font-weight:600}
+.scen-affected-row .r-shift{font-size:11px;color:var(--ink-2)}
+.scen-affected-row .r-badge{padding:2px 8px;border-radius:99px;font-size:9px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em}
+.scen-affected-row .r-badge.dn{background:#FDE9E9;color:#B00019}
+.scen-affected-row .r-badge.up{background:#DFF3EA;color:#0F8759}
+.scen-affected-row .r-badge.flat{background:#F1F2F3;color:var(--ink-3)}
+.scen-saved-section{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.scen-saved-list{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:12px}
+.scen-saved-card{border:1px solid var(--line);border-radius:6px;padding:14px 16px;position:relative}
+.scen-saved-card .s-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.scen-saved-card .s-meta{font-size:11px;color:var(--ink-3);margin-bottom:8px}
+.scen-saved-card .s-actions{display:flex;gap:6px;margin-top:8px}
+.scen-saved-card .s-actions button{background:#fff;border:1px solid var(--line);padding:5px 12px;
+  border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;color:var(--ink);font-family:inherit}
+.scen-saved-card .s-actions button:hover{background:#F7F8F9}
+.scen-saved-card .s-actions .s-load{color:var(--aon-red);border-color:var(--aon-red)}
+.scen-saved-card .s-actions .s-load:hover{background:var(--aon-red);color:#fff}
+
 /* Family accordion */
 .rv-sidebar-controls{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
 .rv-search{width:100%;border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:12px;font-family:inherit}
@@ -1229,6 +1317,7 @@ body.story-mode main{padding-bottom:110px}
   <button class="tab" data-view="retention" onclick="switchView('retention')">Retention Watch</button>
   <button class="tab" data-view="compare" onclick="switchView('compare')">Compare</button>
   <button class="tab" data-view="group" onclick="switchView('group')">Cohort Analysis</button>
+  <button class="tab" data-view="scenarios" onclick="switchView('scenarios')">Scenarios</button>
   <button class="tab" data-view="actions" onclick="switchView('actions')">Notes & Actions</button>
   <button class="tab tab-ref" data-view="frameworks" onclick="switchView('frameworks')" style="margin-left:auto"><svg class="ico tab-icon" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>Frameworks</button>
   <div class="subnav-status">
@@ -1655,6 +1744,55 @@ body.story-mode main{padding-bottom:110px}
     <span style="font-size:11px;color:var(--ink-3);font-style:italic;margin-left:6px">Auto-fills the 3 named successors for that role</span>
   </div>
   <div class="cmp-grid" id="cmp-grid"></div>
+</section>
+
+<!-- =================== SCENARIOS =================== -->
+<section class="view" id="view-scenarios">
+  <div class="page-hd">
+    <h1>Scenario Planning</h1>
+    <div class="sub">Run what-if scenarios on the pipeline. Undo-able. Save with a name to keep for later.</div>
+  </div>
+
+  <div class="scen-header">
+    <div class="scen-current">
+      <span class="scen-lbl">Scenario name</span>
+      <input id="scen-name" class="scen-name-input" placeholder="Untitled scenario · type a name to save"/>
+      <span class="scen-count" id="scen-count">0 changes</span>
+    </div>
+    <div class="scen-actions">
+      <button class="scen-btn" onclick="resetScenario()">Reset</button>
+      <button class="scen-btn primary" id="scen-save-btn" onclick="saveScenario()">Save</button>
+    </div>
+  </div>
+
+  <div class="scen-workarea">
+    <div class="scen-panel scen-builder">
+      <div class="scen-panel-hd">
+        <h2>Add a change</h2>
+        <div class="scen-type-tabs">
+          <button class="active" data-type="departure" onclick="setScenType('departure')">Departure</button>
+          <button data-type="promotion" onclick="setScenType('promotion')">Promotion</button>
+          <button data-type="devbet" onclick="setScenType('devbet')">Dev bet</button>
+        </div>
+      </div>
+      <div id="scen-config" class="scen-config"></div>
+
+      <div class="scen-panel-hd" style="margin-top:22px">
+        <h2>Changes in this scenario</h2>
+      </div>
+      <div id="scen-changes-list" class="scen-changes-list"></div>
+    </div>
+
+    <div class="scen-panel scen-impact">
+      <div class="scen-panel-hd"><h2>Impact vs. base state</h2></div>
+      <div id="scen-impact-content"></div>
+    </div>
+  </div>
+
+  <div class="scen-saved-section">
+    <div class="scen-panel-hd"><h2>Saved scenarios</h2><span class="muted" id="scen-saved-count">0 saved</span></div>
+    <div id="scen-saved-list" class="scen-saved-list"></div>
+  </div>
 </section>
 
 <!-- =================== ACTIONS =================== -->
@@ -2477,7 +2615,13 @@ let STATE = {
   roleSort: "health", roleHealthFilter: "all",
   currentRole: null, currentLeader: null,
   notes: {}, actions: {}, roleNotes: {},
-  charts: {}, demo: true
+  charts: {}, demo: true,
+  // Scenarios
+  scenario: {name:"", changes:[]},
+  scenType: "departure",
+  scenDevBetSelection: [],
+  scenDevBetDelta: 0.5,
+  savedScenarios: []
 };
 
 function init(){
@@ -2485,6 +2629,7 @@ function init(){
   const demo = generateDemo();
   STATE.leaders = demo.leaders; STATE.roles = demo.roles;
   loadState();
+  loadSavedScenarios();
   buildFilters();
   // Default to CEO mode and Executive Summary
   document.body.classList.add("ceo-mode");
@@ -2830,6 +2975,7 @@ function switchView(view){
   if(view==="leaders") renderLeaderList();
   if(view==="retention") renderRetention();
   if(view==="compare") renderCompare();
+  if(view==="scenarios") renderScenarios();
   if(view==="actions") renderActionsView();
 }
 function renderAll(){
@@ -5250,6 +5396,375 @@ function updateActionStatus(lid, ts, newStatus){
 }
 
 // ---------- Actions consolidated ----------
+// ========== SCENARIOS ==========
+const SCEN_STORAGE_KEY = "vindhya-tr-scenarios-v1";
+
+function loadSavedScenarios(){
+  try{
+    const raw = localStorage.getItem(SCEN_STORAGE_KEY);
+    STATE.savedScenarios = raw ? JSON.parse(raw) : [];
+  } catch(e){ STATE.savedScenarios = []; }
+}
+function persistSavedScenarios(){
+  try{ localStorage.setItem(SCEN_STORAGE_KEY, JSON.stringify(STATE.savedScenarios)); } catch(e){}
+}
+
+// Deep clone via JSON (fine for our data shape)
+function _cloneState(){
+  return {
+    leaders: JSON.parse(JSON.stringify(STATE.leaders)),
+    roles: JSON.parse(JSON.stringify(STATE.roles))
+  };
+}
+
+// Apply a scenario's changes to a deep-cloned base state.
+function applyScenario(scenario){
+  const {leaders, roles} = _cloneState();
+  const filledRoleIds = new Set();
+  const departedIds = new Set();
+  (scenario.changes||[]).forEach(ch=>{
+    if(ch.type === "departure"){
+      departedIds.add(ch.leaderId);
+    } else if(ch.type === "promotion"){
+      // Promoted leader is off the successor bench; target role is filled.
+      departedIds.add(ch.leaderId);
+      if(ch.toRoleId) filledRoleIds.add(ch.toRoleId);
+    } else if(ch.type === "devbet"){
+      (ch.leaderIds||[]).forEach(id=>{
+        const l = leaders.find(x=>x.id===id);
+        if(!l) return;
+        l.potentialScore = Math.min(5, (l.potentialScore || 0) + (ch.delta||0));
+        // Re-derive 9-box row from new potential score
+        l.nineBoxRow = l.potentialScore >= 3.8 ? 0 : l.potentialScore >= 3.0 ? 1 : 2;
+        // Rebuild nineBox cell name for consistency
+        const nb9 = _NAMES_NB[l.nineBoxRow] && _NAMES_NB[l.nineBoxRow][l.nineBoxCol||1];
+        if(nb9) l.nineBox = nb9;
+      });
+    }
+  });
+  // Remove departed/promoted leaders from all successor slots
+  roles.forEach(r=>{
+    r.slots = (r.slots||[]).filter(s=>!departedIds.has(s.leaderId));
+    r.successors = (r.successors||[]).filter(id=>!departedIds.has(id));
+  });
+  return {leaders, roles, filledRoleIds, departedIds};
+}
+
+// Compute impact tiles + affected roles list
+function computeImpact(scenario){
+  const READY_NOW = READINESS[0];
+  const scen = applyScenario(scenario);
+  // Base metrics
+  const totalRoles = STATE.roles.length;
+  const baseReadyNowRoles = STATE.roles.filter(r=>
+    (r.slots||[]).some(s=>s.readiness===READY_NOW)
+  ).length;
+  const baseHealthPct = Math.round(100*baseReadyNowRoles/totalRoles);
+  const baseFL = STATE.leaders.filter(l=>l.nineBoxRow===0 && l.nineBoxCol===2).length;
+  const baseRN = STATE.roles.reduce((s,r)=>
+    s + (r.slots||[]).filter(sl=>sl.readiness===READY_NOW).length, 0);
+  // Scenario metrics — exclude filled roles from denominator (they no longer need succession)
+  const activeRoles = scen.roles.filter(r=>!scen.filledRoleIds.has(r.id));
+  const scenTotalRoles = activeRoles.length;
+  const scenReadyNowRoles = activeRoles.filter(r=>
+    (r.slots||[]).some(s=>s.readiness===READY_NOW)
+  ).length;
+  const scenHealthPct = scenTotalRoles ? Math.round(100*scenReadyNowRoles/scenTotalRoles) : 100;
+  const scenFL = scen.leaders.filter(l=>l.nineBoxRow===0 && l.nineBoxCol===2).length;
+  const scenRN = scen.roles.reduce((s,r)=>
+    s + (r.slots||[]).filter(sl=>sl.readiness===READY_NOW).length, 0);
+  // Affected roles: where pipeline class changed OR slot count changed
+  const affected = [];
+  STATE.roles.forEach(br=>{
+    const sr = scen.roles.find(x=>x.id===br.id);
+    if(!sr) return;
+    if(scen.filledRoleIds.has(br.id)){
+      affected.push({role:br, from:"", to:"", note:"Filled by promotion", tone:"up"});
+      return;
+    }
+    const baseClass = pipeClassFor(br.slots||[]);
+    const scenClass = pipeClassFor(sr.slots||[]);
+    const baseBench = (br.slots||[]).length;
+    const scenBench = (sr.slots||[]).length;
+    if(baseClass !== scenClass){
+      const worse = ["g","a","o","r"].indexOf(scenClass) > ["g","a","o","r"].indexOf(baseClass);
+      affected.push({
+        role:br, from:baseClass, to:scenClass,
+        note:_labelPipeClass(baseClass)+" → "+_labelPipeClass(scenClass),
+        tone: worse ? "dn" : "up"
+      });
+    } else if(baseBench !== scenBench){
+      affected.push({
+        role:br, from:baseClass, to:scenClass,
+        note:"Bench depth "+baseBench+" → "+scenBench,
+        tone: scenBench < baseBench ? "dn" : "up"
+      });
+    }
+  });
+  return {
+    baseHealthPct, scenHealthPct,
+    baseRN, scenRN,
+    baseFL, scenFL,
+    affected
+  };
+}
+function _labelPipeClass(cls){
+  return {g:"Healthy",a:"Watch",o:"At-risk",r:"Exposed"}[cls] || cls;
+}
+
+// ---------- Scenario tab renderer ----------
+function renderScenarios(){
+  renderScenBuilder();
+  renderScenChangesList();
+  renderScenImpact();
+  renderScenSavedList();
+  updateScenSaveBtn();
+  document.getElementById("scen-name").value = STATE.scenario.name || "";
+  document.getElementById("scen-name").oninput = (e)=>{
+    STATE.scenario.name = e.target.value;
+    updateScenSaveBtn();
+  };
+}
+function updateScenSaveBtn(){
+  const btn = document.getElementById("scen-save-btn");
+  if(!btn) return;
+  const hasName = (STATE.scenario.name||"").trim().length > 0;
+  const hasChanges = (STATE.scenario.changes||[]).length > 0;
+  btn.disabled = !(hasName && hasChanges);
+}
+
+function setScenType(t){
+  STATE.scenType = t;
+  document.querySelectorAll(".scen-type-tabs button").forEach(b=>{
+    b.classList.toggle("active", b.dataset.type===t);
+  });
+  renderScenBuilder();
+}
+function renderScenBuilder(){
+  const el = document.getElementById("scen-config");
+  if(!el) return;
+  const t = STATE.scenType;
+  if(t === "departure"){
+    const opts = STATE.leaders.slice().sort((a,b)=>a.name.localeCompare(b.name))
+      .map(l=>`<option value="${l.id}">${l.name} · ${l.level} · ${l.bu.replace("Vindhya ","")}</option>`).join("");
+    el.innerHTML = `
+      <div class="cfg-row">
+        <label>Who leaves?</label>
+        <select id="scen-dep-leader"><option value="">— Pick a leader —</option>${opts}</select>
+        <div class="helper">Simulates the leader leaving. They're removed from every successor slot they're on.</div>
+      </div>
+      <button class="scen-add-btn" onclick="addDepartureChange()">Add departure</button>`;
+  } else if(t === "promotion"){
+    const leaderOpts = STATE.leaders.slice().sort((a,b)=>a.name.localeCompare(b.name))
+      .map(l=>`<option value="${l.id}">${l.name} · ${l.level} · ${l.bu.replace("Vindhya ","")}</option>`).join("");
+    const roleOpts = STATE.roles.slice().sort((a,b)=>a.title.localeCompare(b.title))
+      .map(r=>`<option value="${r.id}">${r.title} · Tier ${r.tier} · ${r.bu.replace("Vindhya ","")}</option>`).join("");
+    el.innerHTML = `
+      <div class="cfg-row">
+        <label>Promote which leader?</label>
+        <select id="scen-prom-leader"><option value="">— Pick a leader —</option>${leaderOpts}</select>
+      </div>
+      <div class="cfg-row">
+        <label>Into which role?</label>
+        <select id="scen-prom-role"><option value="">— Pick a role —</option>${roleOpts}</select>
+        <div class="helper">Target role becomes filled — it's excluded from pipeline health. Promoted leader is off all other slots.</div>
+      </div>
+      <button class="scen-add-btn" onclick="addPromotionChange()">Add promotion</button>`;
+  } else if(t === "devbet"){
+    const chips = STATE.leaders.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(l=>{
+      const sel = STATE.scenDevBetSelection.includes(l.id) ? "selected" : "";
+      return `<span class="scen-devbet-chip ${sel}" onclick="toggleDevBetLeader('${l.id}')">${l.name}</span>`;
+    }).join("");
+    const delta = STATE.scenDevBetDelta;
+    el.innerHTML = `
+      <div class="cfg-row">
+        <label>Which leaders to develop?</label>
+        <div class="scen-devbet-picker">${chips}</div>
+        <div class="helper">Click to add/remove. Selected: <b>${STATE.scenDevBetSelection.length}</b> leaders</div>
+      </div>
+      <div class="cfg-row">
+        <label>Potential uplift after 12–18 months</label>
+        <input type="range" class="scen-slider" min="0.2" max="1.2" step="0.1" value="${delta}" oninput="setDevBetDelta(this.value)"/>
+        <div>Uplift: <span class="scen-slider-val">+${Number(delta).toFixed(1)}</span> on Potential score (out of 5)</div>
+      </div>
+      <button class="scen-add-btn" onclick="addDevBetChange()" ${STATE.scenDevBetSelection.length===0?"disabled":""}>Add dev bet</button>`;
+  }
+}
+
+function toggleDevBetLeader(id){
+  const arr = STATE.scenDevBetSelection;
+  const i = arr.indexOf(id);
+  if(i<0) arr.push(id); else arr.splice(i,1);
+  renderScenBuilder();
+}
+function setDevBetDelta(v){
+  STATE.scenDevBetDelta = parseFloat(v);
+  const label = document.querySelector(".scen-slider-val");
+  if(label) label.textContent = "+"+STATE.scenDevBetDelta.toFixed(1);
+}
+
+function addDepartureChange(){
+  const id = document.getElementById("scen-dep-leader").value;
+  if(!id){ toast("Pick a leader first","warn"); return; }
+  const l = STATE.leaders.find(x=>x.id===id);
+  if(!l) return;
+  STATE.scenario.changes.push({type:"departure", leaderId:id, leaderName:l.name});
+  onScenarioChanged();
+}
+function addPromotionChange(){
+  const id = document.getElementById("scen-prom-leader").value;
+  const roleId = document.getElementById("scen-prom-role").value;
+  if(!id || !roleId){ toast("Pick both a leader and a role","warn"); return; }
+  const l = STATE.leaders.find(x=>x.id===id);
+  const r = STATE.roles.find(x=>x.id===roleId);
+  if(!l || !r) return;
+  STATE.scenario.changes.push({type:"promotion", leaderId:id, leaderName:l.name, toRoleId:roleId, toRoleTitle:r.title});
+  onScenarioChanged();
+}
+function addDevBetChange(){
+  if(STATE.scenDevBetSelection.length===0){ toast("Pick at least one leader","warn"); return; }
+  const ids = [...STATE.scenDevBetSelection];
+  const names = ids.map(id=>STATE.leaders.find(x=>x.id===id)?.name).filter(Boolean);
+  STATE.scenario.changes.push({type:"devbet", leaderIds:ids, leaderNames:names, delta:STATE.scenDevBetDelta});
+  STATE.scenDevBetSelection = [];
+  onScenarioChanged();
+}
+function removeChange(idx){
+  STATE.scenario.changes.splice(idx,1);
+  onScenarioChanged();
+}
+function onScenarioChanged(){
+  renderScenChangesList();
+  renderScenImpact();
+  document.getElementById("scen-count").textContent =
+    STATE.scenario.changes.length + " change" + (STATE.scenario.changes.length===1?"":"s");
+  updateScenSaveBtn();
+  renderScenBuilder();
+}
+function resetScenario(){
+  STATE.scenario = {name:"", changes:[]};
+  STATE.scenDevBetSelection = [];
+  document.getElementById("scen-name").value = "";
+  onScenarioChanged();
+}
+function saveScenario(){
+  const name = (STATE.scenario.name||"").trim();
+  if(!name){ toast("Type a scenario name to save","warn"); return; }
+  if(STATE.scenario.changes.length===0){ toast("Add at least one change first","warn"); return; }
+  STATE.savedScenarios.push({
+    name,
+    changes: JSON.parse(JSON.stringify(STATE.scenario.changes)),
+    savedAt: new Date().toISOString()
+  });
+  persistSavedScenarios();
+  toast("Scenario saved","ok");
+  resetScenario();
+  renderScenSavedList();
+}
+function loadSavedScenario(idx){
+  const s = STATE.savedScenarios[idx];
+  if(!s) return;
+  STATE.scenario = {name:s.name, changes:JSON.parse(JSON.stringify(s.changes))};
+  renderScenarios();
+  toast("Scenario loaded — edit or reset","ok");
+}
+function deleteSavedScenario(idx){
+  if(!confirm("Delete this saved scenario?")) return;
+  STATE.savedScenarios.splice(idx,1);
+  persistSavedScenarios();
+  renderScenSavedList();
+}
+
+function renderScenChangesList(){
+  const el = document.getElementById("scen-changes-list");
+  if(!el) return;
+  const ch = STATE.scenario.changes || [];
+  if(!ch.length){
+    el.innerHTML = `<div class="scen-empty-state">No changes yet. Add a departure, promotion or dev bet above.</div>`;
+    return;
+  }
+  el.innerHTML = ch.map((c,i)=>{
+    let body = "";
+    if(c.type==="departure") body = `<b>${c.leaderName}</b> leaves`;
+    else if(c.type==="promotion") body = `<b>${c.leaderName}</b> promoted to <b>${c.toRoleTitle}</b>`;
+    else if(c.type==="devbet") body = `<b>${c.leaderNames.length}</b> leaders get <b>+${c.delta.toFixed(1)}</b> potential uplift`;
+    const typeLbl = c.type==="devbet"?"DEV BET":c.type.toUpperCase();
+    return `<div class="scen-change-row">
+      <span class="ch-type">${typeLbl}</span>
+      <div class="ch-body">${body}</div>
+      <button class="ch-remove" onclick="removeChange(${i})" title="Remove">×</button>
+    </div>`;
+  }).join("");
+}
+
+function renderScenImpact(){
+  const el = document.getElementById("scen-impact-content");
+  if(!el) return;
+  if(!STATE.scenario.changes.length){
+    el.innerHTML = `<div class="scen-empty-state">Add a change to see impact vs. base state.</div>`;
+    return;
+  }
+  const imp = computeImpact(STATE.scenario);
+  const tile = (lbl, base, scen, unit) => {
+    const d = scen - base;
+    const arrow = base===scen ? "→" : "→";
+    const tone = base===scen ? "flat" : (d>0 ? "up" : "dn");
+    const sign = d>0 ? "+" : "";
+    return `<div class="scen-impact-tile">
+      <div class="lbl">${lbl}</div>
+      <div class="val">${base}${unit||""}<span class="arrow">${arrow}</span>${scen}${unit||""}</div>
+      <div class="delta ${tone}">${base===scen?"no change":sign+d+(unit||"")}</div>
+    </div>`;
+  };
+  let html = `<div class="scen-impact-tiles">
+    ${tile("Pipeline Health", imp.baseHealthPct, imp.scenHealthPct, "%")}
+    ${tile("Ready-Now successors", imp.baseRN, imp.scenRN)}
+    ${tile("Future Leaders", imp.baseFL, imp.scenFL)}
+  </div>`;
+  if(imp.affected.length){
+    html += `<div class="scen-affected-hd">Roles affected (${imp.affected.length})</div>`;
+    html += imp.affected.slice(0,20).map(af=>{
+      return `<div class="scen-affected-row">
+        <div class="r-name">${af.role.title}</div>
+        <div class="r-shift">${af.role.bu.replace("Vindhya ","")} · Tier ${af.role.tier}</div>
+        <div class="r-badge ${af.tone}">${af.note}</div>
+      </div>`;
+    }).join("");
+    if(imp.affected.length>20) html += `<div class="scen-empty-state">+${imp.affected.length-20} more affected roles</div>`;
+  } else {
+    html += `<div class="scen-affected-hd">Roles affected (0)</div>
+      <div class="scen-empty-state">No roles change status under this scenario.</div>`;
+  }
+  el.innerHTML = html;
+}
+
+function renderScenSavedList(){
+  const el = document.getElementById("scen-saved-list");
+  const cnt = document.getElementById("scen-saved-count");
+  if(!el) return;
+  const arr = STATE.savedScenarios || [];
+  if(cnt) cnt.textContent = arr.length + " saved";
+  if(!arr.length){
+    el.innerHTML = `<div class="scen-empty-state">No saved scenarios. Build a scenario above, give it a name, and click Save.</div>`;
+    return;
+  }
+  el.innerHTML = arr.map((s,i)=>{
+    const dt = s.savedAt ? new Date(s.savedAt).toLocaleDateString() : "";
+    const kinds = {};
+    (s.changes||[]).forEach(c=>{ kinds[c.type] = (kinds[c.type]||0)+1; });
+    const kindStr = Object.entries(kinds).map(([k,n])=>`${n} ${k==="devbet"?"dev bet":k}${n>1?"s":""}`).join(" · ");
+    return `<div class="scen-saved-card">
+      <div class="s-name">${s.name}</div>
+      <div class="s-meta">${(s.changes||[]).length} change${(s.changes||[]).length===1?"":"s"} · ${kindStr}</div>
+      <div class="s-meta">Saved ${dt}</div>
+      <div class="s-actions">
+        <button class="s-load" onclick="loadSavedScenario(${i})">Load</button>
+        <button onclick="deleteSavedScenario(${i})">Delete</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
 function renderActionsView(){
   const cc = document.getElementById("all-comments");
   const allNotes = [];
@@ -5508,484 +6023,4 @@ function renderCompareSlot(idx, l){
   const readClass = r => r===READINESS[0]?"g":r===READINESS[1]?"y":r===READINESS[2]?"o":"r";
   const flightClass = f => f==="Low"?"g":f==="Medium"?"y":"r";
   const traitBar = (t) => {
-    const v = l.traits[t].PT;
-    if(v==null) return `<div class="cmp-trait-mini"><div class="name">${t}</div><div class="score" style="color:var(--ink-4)">n/a</div></div>`;
-    const cls = v<3.2?"low":v<3.5?"med":v<4.0?"high":"strong";
-    return `<div class="cmp-trait-mini">
-      <div><div class="name">${t}</div><div class="bar"><div class="fill ${cls}" style="width:${Math.round(100*v/5)}%"></div></div></div>
-      <div class="score">${v.toFixed(1)}</div>
-    </div>`;
-  };
-  const ptTraits = TRAITS.filter(t=>!BUSINESS_LEVERS.includes(t));
-
-  return `<div class="cmp-col">
-    <div class="cmp-hero">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="lp-avatar avatar" style="width:52px;height:52px;font-size:18px">${initials(l.name)}</div>
-          <div>
-            <div class="cmp-slot-lbl" style="color:rgba(255,255,255,.6)">Slot ${idx+1}</div>
-            <div class="cmp-hero-name">${l.name}</div>
-            <div class="cmp-hero-role">${l.role}</div>
-          </div>
-        </div>
-        <button class="cmp-remove" style="color:rgba(255,255,255,.75)" onclick="setCompareSlot(${idx}, '')">×</button>
-      </div>
-    </div>
-    <div class="cmp-body">
-      <div class="cmp-row large">
-        <div class="k">Potential</div>
-        <div class="v">${l.potentialScore.toFixed(1)}${deltaSpan(l.potentialScore,'potentialScore')}</div>
-      </div>
-      <div class="cmp-row large">
-        <div class="k">Perception</div>
-        <div class="v">${l.fitToRole.toFixed(1)}${deltaSpan(l.fitToRole,'fitToRole')}</div>
-      </div>
-      <div class="cmp-row large">
-        <div class="k">Personality</div>
-        <div class="v">${l.personalityScore.toFixed(1)}${deltaSpan(l.personalityScore,'personalityScore')}</div>
-      </div>
-      <div class="cmp-row"><div class="k">Level</div><div class="v">${l.level}</div></div>
-      <div class="cmp-row"><div class="k">BU · Function</div><div class="v">${l.bu.replace('Vindhya ','')} · ${l.function}</div></div>
-      <div class="cmp-row"><div class="k">9-box</div><div class="v">${l.nineBox}</div></div>
-      <div class="cmp-row"><div class="k">Readiness</div><div class="v"><span class="badge ${readClass(l.readiness)}">${l.readiness}</span></div></div>
-      <div class="cmp-row"><div class="k">Flight risk</div><div class="v"><span class="badge ${flightClass(l.flightRisk)}">${l.flightRisk}</span></div></div>
-      <div class="cmp-row"><div class="k">Openness to relocate</div><div class="v">${l.openRelocate?"Yes":"Limited"}</div></div>
-      <div class="cmp-row"><div class="k">AI readiness</div><div class="v">CR: ${["Low","Med","High"][l.changeReadiness-1]} · Use: ${["Low","Med","High"][l.aiUse-1]}</div></div>
-      <div class="cmp-row"><div class="k">Target role</div><div class="v" style="font-size:12px">${l.aspiration}</div></div>
-
-      <div style="margin-top:16px;font-size:10px;text-transform:uppercase;color:var(--ink-3);font-weight:600;letter-spacing:.06em">GLIDE — Potential (PT)</div>
-      <div style="margin-top:6px">${ptTraits.map(traitBar).join("")}</div>
-    </div>
-  </div>`;
-}
-function setCompareSlot(idx, lid){
-  STATE.cmpSlots[idx] = lid || null;
-  renderCompare();
-}
-function clearCompare(){
-  STATE.cmpSlots = [null,null,null];
-  renderCompare();
-}
-function loadSlate(rid){
-  if(!rid){ return; }
-  const r = STATE.roles.find(x=>x.id===rid); if(!r) return;
-  const ids = (r.slots||[]).map(s=>s.leaderId).slice(0,3);
-  STATE.cmpSlots = [ids[0]||null, ids[1]||null, ids[2]||null];
-  renderCompare();
-}
-function openCompareForLeader(lid){
-  STATE.compareMode = "leaders";
-  STATE.cmpSlots[0] = lid;
-  STATE.cmpSlots[1] = null; STATE.cmpSlots[2] = null;
-  switchView("compare");
-}
-function compareRoleSuccessors(rid){
-  STATE.compareMode = "role";
-  loadSlate(rid);
-  switchView("compare");
-  const picker = document.getElementById("cmp-slate-picker");
-  if(picker) picker.value = rid;
-}
-// Alias for backward compat with any existing onclick handlers
-function compareRoleSlate(rid){ compareRoleSuccessors(rid); }
-
-// ---------- What-if mode ----------
-function toggleWhatIf(){
-  STATE.whatIf = !STATE.whatIf;
-  if(STATE.whatIf){
-    // Snapshot original state (deep clone)
-    STATE.whatIfScenario = STATE.roles.map(r=>({
-      roleId: r.id, slots: (r.slots||[]).map(s=>({...s}))
-    }));
-  } else {
-    // Restore original state
-    if(STATE.whatIfScenario){
-      STATE.whatIfScenario.forEach(snap=>{
-        const r = STATE.roles.find(x=>x.id===snap.roleId);
-        if(r) r.slots = snap.slots.map(s=>({...s}));
-        if(r) r.successors = r.slots.map(s=>s.leaderId);
-      });
-    }
-    STATE.whatIfScenario = null;
-  }
-  renderRoles();
-}
-function whatIfSwap(roleId, slotIdx, newLeaderId){
-  const r = STATE.roles.find(x=>x.id===roleId); if(!r) return;
-  if(!r.slots[slotIdx]) return;
-  r.slots[slotIdx].leaderId = newLeaderId;
-  r.successors = r.slots.map(s=>s.leaderId);
-  renderRoles();
-}
-function whatIfReadiness(roleId, slotIdx, newReadiness){
-  const r = STATE.roles.find(x=>x.id===roleId); if(!r) return;
-  if(!r.slots[slotIdx]) return;
-  r.slots[slotIdx].readiness = newReadiness;
-  renderRoles();
-}
-
-// ---------- Story mode ----------
-const STORY_STEPS = [
-  {view:"executive", title:"Executive summary — the verdict", desc:"Start with the one-line verdict: is the pipeline healthy? Which roles need attention? Who are the future leaders?"},
-  {view:"executive", title:"Named exposed roles", desc:"Walk through the specific critical roles that don't have adequate Ready-Now coverage — these are where the CEO needs to invest personal sponsor time."},
-  {view:"executive", title:"Top potential + succession front-runners", desc:"The names to know — leaders with the highest Potential, and those Ready-Now for Tier-1 roles."},
-  {view:"executive", title:"Retention conversations to have", desc:"High flight-risk leaders on critical successor lists — losing any of them meaningfully weakens the pipeline."},
-  {view:"executive", title:"Can this leadership deliver the strategy?", desc:"The cohort's strongest and weakest traits, tied to Vindhya's strategic priorities — where do we deliver, where are we exposed?"},
-  {view:"group", title:"Cohort headlines", desc:"Start with the topline: how many leaders in the Top-200, what proportion Ready-Now, what's the flight risk profile."},
-  {view:"group", title:"Potential — Development Centre scores", desc:"Which traits does the cohort demonstrate strongest / weakest? Anchor everything else against this shape."},
-  {view:"group", title:"Personality (ADEPT-15)", desc:"How the cohort is wired vs Vindhya benchmark. Where the group's natural strengths and risks lie."},
-  {view:"group", title:"9-box distribution", desc:"How the whole Top-200 splits across Performance × Potential. Click cells to drill into leaders."},
-  {view:"group", title:"AI Readiness", desc:"Change readiness × AI use. How well positioned is the leadership for Vindhya's digital transformation."},
-  {view:"succession", title:"Pipeline health", desc:"The overall pipeline health gauge. Are we above the 55% Ready-Now threshold?"},
-  {view:"succession", title:"Critical role pipeline table", desc:"Each critical role, its named successors, their readiness — sort by Red-first to tackle risk."},
-  {view:"succession", title:"Successor Readiness Matrix", desc:"The successor pool plotted on Fit × Potential — see where each successor sits."},
-  {view:"roles", title:"Deep-dive on critical roles", desc:"Walk through each critical role and its successor list one by one — start with the exposed ones."},
-  {view:"retention", title:"Retention risk deep-dive", desc:"All high-flight-risk leaders in one view — capture retention actions live before closing the session."}
-];
-function startStoryMode(){
-  STATE.storyActive = true; STATE.storyStep = 0;
-  document.body.classList.add("story-mode");
-  document.getElementById("story-bar").classList.add("active");
-  goStoryStep(0);
-}
-function exitStoryMode(){
-  STATE.storyActive = false;
-  document.body.classList.remove("story-mode");
-  document.getElementById("story-bar").classList.remove("active");
-}
-function goStoryStep(i){
-  if(i<0||i>=STORY_STEPS.length) return;
-  STATE.storyStep = i;
-  const step = STORY_STEPS[i];
-  switchView(step.view);
-  document.getElementById("story-num").textContent = `Step ${i+1} of ${STORY_STEPS.length}`;
-  document.getElementById("story-title").textContent = step.title;
-  document.getElementById("story-desc").textContent = step.desc;
-  document.getElementById("story-progress-fill").style.width = ((i+1)/STORY_STEPS.length*100)+"%";
-  document.getElementById("story-prev").disabled = i===0;
-  document.getElementById("story-next").disabled = i===STORY_STEPS.length-1;
-  document.getElementById("story-next").textContent = i===STORY_STEPS.length-1 ? "Done ✓" : "Next →";
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-function storyNext(){ if(STATE.storyStep<STORY_STEPS.length-1) goStoryStep(STATE.storyStep+1); }
-function storyPrev(){ if(STATE.storyStep>0) goStoryStep(STATE.storyStep-1); }
-
-// ---------- Print / PDF ----------
-function printReport(){
-  // Simply invoke browser print — @media print CSS handles the layout
-  window.print();
-}
-
-function nowFmt(){
-  const d = new Date(); const pad=n=>String(n).padStart(2,"0");
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
-
-// ---------- Excel ----------
-function openUpload(){ document.getElementById("upload-modal").classList.add("open"); }
-function closeUpload(){ document.getElementById("upload-modal").classList.remove("open"); }
-function downloadTemplate(){
-  const wb = XLSX.utils.book_new();
-
-  // ---------- 1 · Instructions sheet ----------
-  const instr = [
-    ["Vindhya Talent Review — Data Upload Template"],
-    ["Aon Assessment Solutions · Version 1.0"],
-    [""],
-    ["HOW TO USE THIS TEMPLATE"],
-    [""],
-    ["1. Populate the five data sheets in this workbook:"],
-    ["   • Leaders — one row per leader in your Top-200 (or larger) cohort"],
-    ["   • Roles — one row per critical role in your succession universe"],
-    ["   • Successors — one row per (Role × Leader) mapping with readiness for that specific role"],
-    ["   • (Reference tab shows all allowed values — treat as read-only)"],
-    [""],
-    ["2. Save the workbook and upload it in the tool via the 'Upload data' button."],
-    [""],
-    ["3. The tool will auto-populate every visualisation, KPI, and drill-down from your data."],
-    [""],
-    ["KEY RULES"],
-    [""],
-    ["• LeaderID and RoleID must be unique within each sheet."],
-    ["• LeaderID and RoleID are the join keys — the Successors sheet references both."],
-    ["• GLIDE trait scores are on a 1.0–5.0 scale (one decimal)."],
-    ["• ADEPT-15 personality scores are on a 1.0–9.0 Sten scale (one decimal)."],
-    ["• Business Lever traits (Cultural Synergy · Trust & Loyalty · Energy & Tenacity) have Personality (PN) + Perception (PC) scores only — no Potential (PT), per the GLIDE framework."],
-    ["• Leave any cell blank if data is not available — the tool handles missing data gracefully."],
-    ["• Use the exact strings shown in the Reference sheet for enum fields (NineBox, Readiness, Level, etc.). Values that don't match will fall back to defaults."],
-    [""],
-    ["WHAT THE TOOL COMPUTES AUTOMATICALLY"],
-    [""],
-    ["• 9-box placement — auto-derived from NineBox column"],
-    ["• Age Range (Under 40 · 40–50 · 51–60 · 61–70) — auto-derived from Age"],
-    ["• Tenure Band — auto-derived from Tenure"],
-    ["• Data Quality flag — auto-derived from completeness of trait scores"],
-    ["• Potential / Fit / Personality overall scores — auto-derived as averages"],
-    ["• Pipeline Health per role — auto-derived from successor readiness spread"],
-    ["• Future Leader membership — auto-derived from 9-box position"],
-    ["• AI Champion classification — auto-derived from ChangeReadiness + AIUse"],
-    [""],
-    ["QUESTIONS?"],
-    [""],
-    ["Contact your Aon Assessment Solutions consultant for support with template design, data validation, or field mappings."],
-  ];
-  const wsInstr = XLSX.utils.aoa_to_sheet(instr);
-  wsInstr["!cols"] = [{wch: 120}];
-  // Bold the section headers by using cell styles (basic)
-  ["A1","A4","A15","A25"].forEach(c=>{ if(wsInstr[c]) wsInstr[c].s = {font:{bold:true}}; });
-  XLSX.utils.book_append_sheet(wb, wsInstr, "Instructions");
-
-  // ---------- 2 · Leaders sheet ----------
-  const leaderCols = [
-    // Identifiers & basics
-    "LeaderID","Name","Age","Gender","Country","BU","OriginBU","Function","Level",
-    "CurrentRole","Manager","Tenure","Education",
-    // Assessment
-    "Performance","NineBox","Readiness",
-    // Aspiration & mobility
-    "Aspiration","Mobility","OpenToRelocate",
-    // Risk
-    "FlightRisk",
-    // AI Readiness
-    "ChangeReadiness_1to3","AIUse_1to3"
-  ];
-  // GLIDE 10 traits × 3 lenses (2 for Business Levers)
-  TRAITS.forEach(t=>{
-    const key = t.replace(/\s+/g,"_").replace(/&/g,"and").replace(/[^a-zA-Z_]/g,"");
-    leaderCols.push(key+"_PN", key+"_PC");
-    if(!BUSINESS_LEVERS.includes(t)) leaderCols.push(key+"_PT");
-  });
-  // ADEPT-15 personality dimensions
-  ADEPT.forEach(dim=>{ leaderCols.push("ADEPT_"+dim); });
-
-  const sample = STATE.leaders.slice(0,3).map(l=>{
-    const row = {
-      LeaderID: l.id, Name: l.name, Age: l.age||"", Gender: l.gender||"",
-      Country: l.country||"", BU: l.bu||"", OriginBU: l.originBU||"", Function: l.function||"",
-      Level: l.level||"", CurrentRole: l.role||"", Manager: l.manager||"",
-      Tenure: l.tenure||"", Education: l.education||"",
-      Performance: l.performance||"", NineBox: l.nineBox||"", Readiness: l.readiness||"",
-      Aspiration: l.aspiration||"", Mobility: l.mobility||"",
-      OpenToRelocate: l.openRelocate?"Yes":"No",
-      FlightRisk: l.flightRisk||"",
-      ChangeReadiness_1to3: l.changeReadiness||"", AIUse_1to3: l.aiUse||""
-    };
-    TRAITS.forEach(t=>{
-      const key = t.replace(/\s+/g,"_").replace(/&/g,"and").replace(/[^a-zA-Z_]/g,"");
-      row[key+"_PN"] = l.traits[t].PN? l.traits[t].PN.toFixed(1) : "";
-      row[key+"_PC"] = l.traits[t].PC? l.traits[t].PC.toFixed(1) : "";
-      if(!BUSINESS_LEVERS.includes(t)) row[key+"_PT"] = l.traits[t].PT? l.traits[t].PT.toFixed(1) : "";
-    });
-    ADEPT.forEach(dim=>{
-      row["ADEPT_"+dim] = l.personality && l.personality[dim] ? l.personality[dim].toFixed(1) : "";
-    });
-    return row;
-  });
-  const wsLeaders = XLSX.utils.json_to_sheet(sample, {header: leaderCols});
-  wsLeaders["!cols"] = leaderCols.map(c=>({wch: Math.max(14, c.length+1)}));
-  XLSX.utils.book_append_sheet(wb, wsLeaders, "Leaders");
-
-  // ---------- 3 · Roles sheet ----------
-  const rolesCols = ["RoleID","Title","Family","Tier","CL","BU","Incumbent","LastReviewed","BusinessContext"];
-  const rSample = STATE.roles.slice(0,5).map(r=>({
-    RoleID: r.id, Title: r.title,
-    Family: r.family||"", Tier: r.tier||"", CL: r.cl||"", BU: r.bu||"",
-    Incumbent: r.incumbent||"—",
-    LastReviewed: "",
-    BusinessContext: ""
-  }));
-  const wsRoles = XLSX.utils.json_to_sheet(rSample, {header: rolesCols});
-  wsRoles["!cols"] = [
-    {wch:10},{wch:36},{wch:26},{wch:6},{wch:6},{wch:20},{wch:22},{wch:14},{wch:60}
-  ];
-  XLSX.utils.book_append_sheet(wb, wsRoles, "Roles");
-
-  // ---------- 4 · Successors sheet ----------
-  const succCols = ["RoleID","LeaderID","ReadinessForThisRole","SlotOrder"];
-  const succSample = [];
-  STATE.roles.slice(0,5).forEach(r=>{
-    (r.slots||[]).forEach((sl,i)=>{
-      succSample.push({
-        RoleID: r.id, LeaderID: sl.leaderId,
-        ReadinessForThisRole: sl.readiness, SlotOrder: i+1
-      });
-    });
-  });
-  const wsSucc = XLSX.utils.json_to_sheet(succSample, {header: succCols});
-  wsSucc["!cols"] = [{wch:10},{wch:10},{wch:24},{wch:12}];
-  XLSX.utils.book_append_sheet(wb, wsSucc, "Successors");
-
-  // ---------- 5 · Reference sheet (read-only) ----------
-  const reference = [
-    ["Field","Allowed values (use these exact strings)"],
-    ["Level (career level)", "LA · LB · LC · LD"],
-    ["Gender", "M · F"],
-    ["Performance", "Exceeds Expectations · Strong Performance · Meets Expectations · Below Expectations · Underperforms"],
-    ["NineBox", NINEBOX_ZONES.flat().join(" · ")],
-    ["Readiness", READINESS.join(" · ")],
-    ["Mobility", "Willing (India + Global) · Willing (India only) · Willing (Region only) · Limited"],
-    ["OpenToRelocate", "Yes · No"],
-    ["FlightRisk", "Low · Medium · High"],
-    ["Education", "Engineering · MBA (Indian) · MBA (Global) · CA / Finance · Arts / Humanities · Other"],
-    ["ChangeReadiness_1to3", "1 (Low) · 2 (Medium) · 3 (High)"],
-    ["AIUse_1to3", "1 (Low) · 2 (Medium) · 3 (High)"],
-    [""],
-    ["ROLES SHEET FIELDS",""],
-    ["Tier", "1 (Enterprise-critical) · 2 (BU / Function-critical) · 3 (Specialist-critical)"],
-    ["CL (role's career level)", "LA · LB · LC · LD"],
-    ["Family (job family)", FAMILIES.join(" · ")],
-    ["BU", BUs.join(" · ")],
-    ["Function", FUNCTIONS.join(" · ")],
-    ["Country", COUNTRIES.join(" · ")],
-    ["LastReviewed", "Date (YYYY-MM-DD format) — optional; used for review-cadence tracking"],
-    ["BusinessContext", "Free text — one paragraph explaining why this role is critical (max 300 chars)"],
-    [""],
-    ["SCORE SCALES",""],
-    ["GLIDE Trait Score (all PN / PC / PT)", "1.0 – 5.0 (one decimal)"],
-    ["ADEPT-15 Personality Score", "1.0 – 9.0 (Sten scale, one decimal)"],
-    [""],
-    ["TRAIT STRUCTURE","(10 traits total)"],
-    ["Business Levers (PN + PC only)", BUSINESS_LEVERS.join(" · ")],
-    ["DC Traits (PN + PC + PT)", TRAITS.filter(t=>!BUSINESS_LEVERS.includes(t)).join(" · ")],
-    [""],
-    ["ADEPT-15 DIMENSIONS",""],
-    ["All 15 dimensions (each on 1–9 scale)", ADEPT.join(" · ")],
-    [""],
-    ["JOIN KEY MODEL",""],
-    ["Leaders.LeaderID", "unique identifier per leader"],
-    ["Roles.RoleID", "unique identifier per critical role"],
-    ["Successors.RoleID + LeaderID", "many-to-many mapping · each row represents one successor placement on one role"],
-    ["Successors.ReadinessForThisRole", "readiness of THIS leader for THIS role (may differ from leader's overall readiness)"],
-    ["Successors.SlotOrder", "1 = primary successor · 2 = secondary · 3 = tertiary (or more)"]
-  ];
-  const wsRef = XLSX.utils.aoa_to_sheet(reference);
-  wsRef["!cols"] = [{wch:38},{wch:90}];
-  XLSX.utils.book_append_sheet(wb, wsRef, "Reference");
-
-  XLSX.writeFile(wb, "Vindhya_TalentReview_Data_Template.xlsx");
-  toast("Template downloaded — see the Instructions sheet first");
-}
-function handleFile(file){
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = (e)=>{
-    try{
-      const data = new Uint8Array(e.target.result);
-      const wb = XLSX.read(data, {type:"array"});
-      const leadersSheet = wb.Sheets["Leaders"] || wb.Sheets[wb.SheetNames[0]];
-      const rolesSheet = wb.Sheets["Roles"];
-      const successorsSheet = wb.Sheets["Successors"];
-      const rows = XLSX.utils.sheet_to_json(leadersSheet);
-
-      // Parse leaders
-      const leaders = rows.map(row=>{
-        // GLIDE traits
-        const traits = {};
-        TRAITS.forEach(t=>{
-          const key = t.replace(/\s+/g,"_").replace(/&/g,"and").replace(/[^a-zA-Z_]/g,"");
-          traits[t] = {
-            PN: parseFloat(row[key+"_PN"])||null,
-            PC: parseFloat(row[key+"_PC"])||null,
-            PT: BUSINESS_LEVERS.includes(t) ? null : (parseFloat(row[key+"_PT"])||null)
-          };
-        });
-        // ADEPT-15 personality
-        const personality = {};
-        ADEPT.forEach(dim=>{
-          const v = parseFloat(row["ADEPT_"+dim]);
-          personality[dim] = isNaN(v) ? 5 : v; // default mid-scale if missing
-        });
-        // 9-box position derived from NineBox string
-        let nineBoxRow=1, nineBoxCol=1;
-        for(let r=0;r<3;r++) for(let c=0;c<3;c++){
-          if(NINEBOX_ZONES[r][c]===row.NineBox){nineBoxRow=r;nineBoxCol=c;}
-        }
-        // Averages
-        let sumPC=0,n=0; TRAITS.forEach(t=>{if(traits[t].PC){sumPC+=traits[t].PC;n++}});
-        let sumPT=0,nPT=0; TRAITS.forEach(t=>{if(traits[t].PT){sumPT+=traits[t].PT;nPT++}});
-        let sumPN=0,nPN=0; TRAITS.forEach(t=>{if(traits[t].PN){sumPN+=traits[t].PN;nPN++}});
-        // Age & derived buckets
-        const age = parseInt(row.Age) || null;
-        const tenure = parseInt(row.Tenure)||0;
-        // Data-quality signal — count trait-lens completeness
-        const totalLenses = TRAITS.length*3 - BUSINESS_LEVERS.length; // 27
-        const completedLenses = TRAITS.reduce((acc,t)=>{
-          let c = 0;
-          if(traits[t].PN!=null) c++;
-          if(traits[t].PC!=null) c++;
-          if(!BUSINESS_LEVERS.includes(t) && traits[t].PT!=null) c++;
-          return acc + c;
-        }, 0);
-        const dqPct = completedLenses/totalLenses;
-        const dqStatus = dqPct>=0.9 ? "complete" : dqPct>=0.6 ? "partial" : "thin";
-        const dqNote = dqStatus==="complete" ? "Full GLIDE assessment"
-                       : dqStatus==="partial" ? `${completedLenses}/${totalLenses} trait scores present`
-                       : `${completedLenses}/${totalLenses} — assessment incomplete`;
-        return {
-          id: String(row.LeaderID||""), name: row.Name||"",
-          role: row.CurrentRole||"", bu: row.BU||"", function: row.Function||"",
-          level: row.Level||"LC", country: row.Country||"India", gender: row.Gender||"M",
-          tenure, manager: row.Manager||"",
-          performance: row.Performance||"", nineBox: row.NineBox||"Core employee",
-          nineBoxRow, nineBoxCol, readiness: row.Readiness||READINESS[2],
-          aspiration: row.Aspiration||"", mobility: row.Mobility||"",
-          openRelocate: (String(row.OpenToRelocate||"")).toLowerCase().startsWith("y"),
-          flightRisk: row.FlightRisk||"Low",
-          changeReadiness: parseInt(row.ChangeReadiness_1to3)||2,
-          aiUse: parseInt(row.AIUse_1to3)||2,
-          traits, personality,
-          potentialScore: nPT?sumPT/nPT:0, fitToRole: n?sumPC/n:0, personalityScore: nPN?sumPN/nPN:0,
-          // Diversity fields
-          age,
-          generation: age ? (age>=60?"Boomer":age>=45?"Gen X":age>=29?"Millennial":"Gen Z") : "Unknown",
-          originBU: row.OriginBU || row.BU || "",
-          education: row.Education || "Other",
-          tenureBand: tenure<3?"<3 yrs":tenure<7?"3–7 yrs":tenure<12?"7–12 yrs":"12+ yrs",
-          dataQuality: {status: dqStatus, note: dqNote}
-        };
-      });
-
-      // Parse roles
-      let roles;
-      if(rolesSheet){
-        const rr = XLSX.utils.sheet_to_json(rolesSheet);
-        roles = rr.map(r=>({
-          id: String(r.RoleID||""), title: r.Title||"",
-          family: r.Family||"Enterprise Executive",
-          tier: parseInt(r.Tier)||1,
-          cl: String(r.CL||"LB"), bu: r.BU||"", incumbent: r.Incumbent||"—",
-          lastReviewed: r.LastReviewed||"",
-          businessContext: r.BusinessContext||"",
-          successors: [],
-          slots: []
-        }));
-      } else { roles = STATE.roles; }
-
-      // Parse Successors sheet — the many-to-many mapping
-      if(successorsSheet){
-        const srows = XLSX.utils.sheet_to_json(successorsSheet);
-        srows.forEach(sr=>{
-          const rid = String(sr.RoleID||"");
-          const lid = String(sr.LeaderID||"");
-          const readiness = sr.ReadinessForThisRole || READINESS[2];
-          const slotOrder = parseInt(sr.SlotOrder)||1;
-          const role = roles.find(r=>r.id===rid);
-          if(!role) return;
-          role.slots[slotOrder-1] = {leaderId: lid, readiness};
-        });
-        // Compact and rebuild successors list
-        roles.forEach(r=>{
-          r.slots = (r.slots||[]).filter(Boolean);
-          r.successors = r.slots.map(s=>s.leaderId);
-        });
-      } else if(rolesSheet){
-        // Backward compat: old templates had Successor1/2/3 columns on Roles
-        const rr = XLSX.utils.sheet_to_json(rolesSheet);
-        rr.forEach(r=>{
-          const role = roles.find(x=>x.id===String(r.RoleID||""));
-          if(!role) return;
-          const succs = [r.Successor1, r.Successor2, r.Successor3].filter(Boolean).map(String);
-          role.slots = succs.map(sid=>{
-            const l = leaders.find(x=>x.id===sid);
-            return {leaderId: s
+    const v = l.traits[t].P
